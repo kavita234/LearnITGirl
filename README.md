@@ -6,4 +6,4 @@ Mentee: Kavita Goodwani
 # About
 Programming Language: Python
 Frameworks: 
-Project Idea: Recommrndation Engine
+Project Idea: Recommendation Engine
