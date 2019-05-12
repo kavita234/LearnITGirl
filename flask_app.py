@@ -1,24 +1,30 @@
 
 # coding: utf-8
 
-# In[18]:
+# In[1]:
 
 
 import numpy as np
+import json
 from flask import Flask, request, jsonify
-from sklearn.externals import joblib
+import pickle
 app = Flask(__name__)
 # Load the model
-model = joblib.load(open('recommendation_model.joblib','rb'))
+
 @app.route('/api',methods=['POST'])
 def predict():
-    data = request.get_json(force=True)
-    prediction = model.recomm((data['exp']))
-    output = prediction[:5]
-    return jsonify(output)
+    try:
+        data=request.get_json(force=True)
+        course_name=str(data["course_name"])
+        model = pickle.load(open('recommendation_model.pkl','rb'))
+    except ValueError:
+        return jsonify("Enter number")
+
+   
+    return json.dumps(model.recomm(course_name))
 
 
-# In[19]:
+# In[2]:
 
 
 if __name__ == '__main__':
